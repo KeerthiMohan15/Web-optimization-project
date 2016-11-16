@@ -458,7 +458,7 @@ window.performance.mark("mark_start_generating"); // collect timing data
 // This for-loop actually creates and appends all of the pizzas when the page loads
 //Place outside the loop to reduce redundancy
   var pizzasDiv = document.getElementById("randomPizzas");
-for (var i = 2; i < 100; i++) {
+for (var i = 2; i < 10; i++) {
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
@@ -489,10 +489,10 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
-  var items = document.querySelectorAll('.mover');
-  var scrollVar = (document.body.scrollTop / 1250);//Place outside loop to avoid redundancy
+  var scrollVar = document.body.scrollTop / 1250;//Place outside loop to avoid redundancy
+  var items = document.getElementsByClassName('mover');//Used Web API
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((scrollVar) + (i % 5));
+    var phase = Math.sin(scrollVar + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 
@@ -514,7 +514,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
   var movingPizzas = document.getElementById('movingPizzas1');
-  for (var i = 0; i < 200; i++) {
+  for (var i = 0; i < 40; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
